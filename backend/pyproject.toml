@@ -1,0 +1,15 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Turns Japanese screenshots into flashcards"
+requires-python = ">=3.14"
+dependencies = [
+    "anthropic>=1.11.0",
+    "click>=8.5.0",
+    "pydantic>=2.13.5",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.16.10",
+]
