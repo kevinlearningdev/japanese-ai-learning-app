@@ -1,0 +1,28 @@
+version: "3"
+
+vars:
+  RUN: uv run --project backend --env-file backend/.env python backend/main.py
+
+tasks:
+  card:
+    desc: "Make a card from one screenshot: task card -- path/to/screenshot.png"
+    cmds:
+      - "{{.RUN}} {{.CLI_ARGS}}"
+
+  cards:
+    desc: Make a card from every screenshot in eval/screenshots/
+    cmds:
+      - for f in eval/screenshots/*; do {{.RUN}} "$f" || exit 1; done
+
+  lint:
+    desc: Check lint and formatting
+    dir: backend
+    cmds:
+      - uv run ruff check .
+      - uv run ruff format --check .
+
+  fmt:
+    desc: Format the backend code
+    dir: backend
+    cmds:
+      - uv run ruff format .
